@@ -734,6 +734,43 @@
 
 
   <script src="assets/js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('gform');
+    const errorMessage = document.querySelector('.error-message');
+    const sentMessage = document.querySelector('.sent-message');
+    const loading = document.querySelector('.loading');
+    
+    form.addEventListener('submit', function(event) {
+      let isValid = true;
+      
+      
+      errorMessage.textContent = '';
+
+      
+      const inputs = form.querySelectorAll('input[required], textarea[required]');
+      inputs.forEach(input => {
+        if (!input.value.trim()) {
+          isValid = false;
+          errorMessage.textContent = 'Please fill out all required fields.';
+        }
+      });
+      
+      if (!isValid) {
+        event.preventDefault(); 
+      } else {
+        
+        loading.style.display = 'block';
+        
+        
+        setTimeout(() => {
+          loading.style.display = 'none';
+          sentMessage.style.display = 'block'; 
+        }, 1000); 
+      }
+    });
+  });
+  </script>
 
 </body>
 
